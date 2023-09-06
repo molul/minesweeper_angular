@@ -1,0 +1,10 @@
+TO DO:
+
+No detecta el you win
+
+Hacer estilos con Tailwind
+	Poner colores en los números según el número de minas alrededor
+
+Hacer mejores letreros de You win/lose
+
+Averiguar cómo poner flags en mobile
