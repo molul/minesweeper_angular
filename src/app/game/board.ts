@@ -6,22 +6,37 @@ const PEERS = [ [-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1
 export class Board {
   cells: Cell[][] = [];
   private remainingCells = 0;
-  private mineCount = 0;
+  public mineCount = 0;
 
-  constructor (size: number, mines: number) {
+  constructor (size: number) {
+    // Create grid
     for (let y = 0; y < size; y++) {
       this.cells[y] = [];
       for (let x = 0; x < size; x++) {
         this.cells[y][x] = new Cell(y, x);
       }
     }
+  }
 
+  //------------------------
+  // Methods:
+  //------------------------
+
+  fillBoard (row: number, col: number, size: number, mines: number) {
     // Assign mines
-    for (let i = 0; i <mines; i++) {
-      this.getRandomCell().mine = true;
+    let minesCount = 0;
+    while (minesCount < mines) {
+      //console.log(minesCount)
+      const y = Math.floor(Math.random() * this.cells.length);
+      const x = Math.floor(Math.random() * this.cells[y].length);
+      if (y !== row && x !== col) {
+        this.cells[y][x].mine = true;
+        minesCount++;
+        //console.log(minesCount, mines)
+      }
     }
 
-
+    // Calculate adjacent mines to all cells
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
         let adjacentMines = 0;
@@ -41,6 +56,7 @@ export class Board {
     }
 
     this.remainingCells = (size * size) - this.mineCount;
+
   }
 
   getRandomCell(): Cell {
