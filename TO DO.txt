@@ -1,10 +1,8 @@
 TO DO:
 
-No detecta el you win
+No detecta el you win?
 
-Hacer estilos con Tailwind
-	Poner colores en los números según el número de minas alrededor
+Hacer el tablero en el primer click (la primera celda siempre está libre)
 
 Hacer mejores letreros de You win/lose
 
-Averiguar cómo poner flags en mobile

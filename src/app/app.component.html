@@ -1,15 +1,25 @@
-<div class="text-center">
+<div class="text-center bg-slate-100 h-screen">
   <h1 class="text-3xl font-bold py-4">
     Minesweeper
   </h1>
+
+  <div class="py-4">
+    <h2 class="font-bold text-xl">Instructions:</h2>
+    <div>
+      Clear a cell: click/touch
+    </div>
+    <div>
+      Set flag: right click on Desktop, long press on mobile
+    </div>
+  </div>
 
   <div class="">
     <table class="border border-black mx-auto">
       <tr *ngFor="let row of board.cells; index as y ">
         <td
-          class="bg-slate-300 w-8 h-8 border border-black"
+          class="bg-slate-400 w-8 h-8 border-2 border-slate-600"
           [ngClass]="{
-            'bg-slate-400': cell.status === 'clear'
+            'bg-slate-200': cell.status === 'clear'
           }"
           *ngFor="let cell of row; index as x"
           (click)="checkCell(cell)"
@@ -17,10 +27,26 @@
         >
           <div class="flex items-center justify-center">
             <!-- <div>{{cell.status}}</div> -->
-            <div class="font-bold" *ngIf="cell.status === 'clear' && !cell.mine">{{cell.proximityMines}}</div>
-            <div *ngIf="cell.status === 'flag'">
+            <div
+              class="font-bold"
+              [ngClass]="{
+                'text-blue-600': cell.proximityMines === 1,
+                'text-green-600': cell.proximityMines === 2,
+                'text-red-600': cell.proximityMines === 3,
+                'text-emerald-600': cell.proximityMines === 4,
+                'text-lime-600': cell.proximityMines === 5,
+                'text-cyan-600': cell.proximityMines === 6,
+                'text-purple-600': cell.proximityMines === 7,
+                'text-pink-600': cell.proximityMines === 8,
+              }"
+              *ngIf="cell.status === 'clear' && !cell.mine">
+              {{cell.proximityMines}}
+            </div>
+
+            <div *ngIf="cell.status === 'flag'" class="">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height: 24px;"><title>flag</title><path d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z" /></svg>
             </div>
+
             <div *ngIf="cell.mine && cell.status === 'clear'">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height: 24px;"><title>mine</title><path d="M23,13V11H19.93C19.75,9.58 19.19,8.23 18.31,7.1L20.5,4.93L19.07,3.5L16.9,5.69C15.77,4.81 14.42,4.25 13,4.07V1H11V4.07C9.58,4.25 8.23,4.81 7.1,5.69L4.93,3.5L3.5,4.93L5.69,7.1C4.81,8.23 4.25,9.58 4.07,11H1V13H4.07C4.25,14.42 4.81,15.77 5.69,16.9L3.5,19.07L4.93,20.5L7.1,18.31C8.23,19.19 9.58,19.75 11,19.93V23H13V19.93C14.42,19.75 15.77,19.19 16.9,18.31L19.07,20.5L20.5,19.07L18.31,16.9C19.19,15.77 19.75,14.42 19.93,13H23M12,8A4,4 0 0,0 8,12H6A6,6 0 0,1 12,6V8Z" /></svg>
             </div>
@@ -29,6 +55,18 @@
         </td>
       </tr>
     </table>
+  </div>
+
+  <div
+    *ngIf="status === 'win'"
+    class="my-4 py-2 px-4 bg-green-700 text-white text-xl font-bold">
+    YOU WIN!!
+  </div>
+
+  <div
+    *ngIf="status === 'lose'"
+    class="my-4 py-2 px-4 bg-red-700 text-white text-xl font-bold">
+    YOU LOSE :(
   </div>
 
   <button (click)="reset()" class="bg-slate-500 text-white px-8 py-2 rounded-lg my-4">Restart</button>

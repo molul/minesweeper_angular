@@ -10,28 +10,36 @@ import { Cell } from './game/cell';
 export class AppComponent {
   title = 'minesweeper';
   board: Board;
+  status: 'playing' | 'win' | 'lose'
+
   constructor() {
     this.reset();
+  }
+
+  reset() {
+    this.board = new Board(10, 5);
+    this.status = 'playing';
   }
 
   checkCell(cell: Cell) {
     const result = this.board.checkCell(cell);
     if (result === 'gameover') {
-      alert('You lose');
+      this.status = 'lose'
     } else if (result === 'win') {
-      alert ('You win!');
+      this.status = 'win';
     }
   }
 
   flag (cell: Cell) {
-    if (cell.status === 'flag') {
-      cell.status = 'open';
-    } else {
-      cell.status = 'flag';
+    if (this.status !== 'win' && this.status !== 'lose') {
+      if (cell.status !== 'clear') {
+        if (cell.status === 'flag') {
+          cell.status = 'open';
+        } else {
+          cell.status = 'flag';
+        }
+      }
     }
   }
 
-  reset() {
-    this.board = new Board(10, 20);
-  }
 }
