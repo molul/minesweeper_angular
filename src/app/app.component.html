@@ -44,25 +44,27 @@
       </div>
     </div>
 
+    <!-- You win box -->
     <div
-    class="rounded-md transition-opacity duration-500 py-2 px-4 bg-green-700 text-white text-sm sm:text-xl font-bold"
-    [ngClass]="{
-      'block opacity-100': status === 'win',
-      'hidden opacity-0': status !== 'win',
-    }"
-  >
-    YOU WIN!!
-  </div>
+      class="animate-pulserounded-md transition-opacity duration-500 py-2 px-4 bg-green-700 text-white text-sm sm:text-xl font-bold"
+      [ngClass]="{
+        'block opacity-100': status === 'win',
+        'hidden opacity-0': status !== 'win',
+      }"
+    >
+      YOU WIN!!
+    </div>
 
-  <div
-    class="rounded-md transition-opacity duration-500 py-2 px-4 bg-red-700 text-white text-sm sm:text-xl font-bold"
-    [ngClass]="{
-      'block opacity-100': status === 'lose',
-      'hidden opacity-0': status !== 'lose',
-    }"
-  >
-    YOU LOSE :(
-  </div>
+    <!-- You lose box -->
+    <div
+      class="animate-pulse rounded-md transition-opacity duration-500 py-2 px-4 bg-red-700 text-white text-sm sm:text-xl font-bold"
+      [ngClass]="{
+        'block opacity-100': status === 'lose',
+        'hidden opacity-0': status !== 'lose',
+      }"
+    >
+      YOU LOOSE :(
+    </div>
 
 		<div>
 			<button
