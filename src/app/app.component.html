@@ -1,4 +1,4 @@
-<div class="text-center bg-slate-700 h-screen p-2">
+<div class="text-center bg-slate-700 min-h-screen p-2">
 
   <div class="">
 
@@ -34,12 +34,48 @@
 
   <!-- Interface -->
   <div class="flex justify-between items-center px-4 py-2 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50">
-		<div class="text-sm sm:text-base border-2 border-slate-500 bg-slate-200 rounded-md px-2 py-1.5">
-      Mines: {{ this.status === 'firstClick' ? this.mines - this.flaggedMines : this.board.mineCount - this.flaggedMines }}
+		<div class="text-sm sm:text-base flex gap-2 items-center">
+      <div class="font-bold">
+        Mines
+      </div>
+      <div class="border-2 border-slate-500 bg-slate-600 rounded-md px-2 py-1.5 text-white">
+        {{ this.status === 'firstClick' ? this.mines - this.flaggedMines : this.board.mineCount - this.flaggedMines }}
+
+      </div>
     </div>
 
+    <div
+    class="rounded-md transition-opacity duration-500 py-2 px-4 bg-green-700 text-white text-sm sm:text-xl font-bold"
+    [ngClass]="{
+      'block opacity-100': status === 'win',
+      'hidden opacity-0': status !== 'win',
+    }"
+  >
+    YOU WIN!!
+  </div>
+
+  <div
+    class="rounded-md transition-opacity duration-500 py-2 px-4 bg-red-700 text-white text-sm sm:text-xl font-bold"
+    [ngClass]="{
+      'block opacity-100': status === 'lose',
+      'hidden opacity-0': status !== 'lose',
+    }"
+  >
+    YOU LOSE :(
+  </div>
+
 		<div>
-			<button (click)="reset()" class="border border-slate-600 text-sm sm:text-base shadow-md bg-slate-500 hover:bg-slate-400 active:bg-slate-400 transition-colors text-white px-8 py-2 rounded-md ">Restart</button>
+			<button
+        (click)="reset()"
+        [disabled]="status === 'firstClick' || status === 'playing'"
+        [ngClass]="{
+          'bg-slate-700 text-slate-500': status === 'firstClick' || status === 'playing',
+          'bg-slate-500 hover:bg-slate-400 active:bg-slate-400 ': status === 'win' || status === 'lose',
+
+        }"
+        class="text-sm sm:text-base shadow-md transition-colors text-white px-6 py-2 rounded-md ">
+        Restart
+      </button>
 		</div>
 	</div>
 
@@ -95,25 +131,6 @@
   </div>
 
 
-  <div
-    class="rounded transition-opacity duration-500 my-4 py-2 px-4 bg-green-700 text-white text-xl font-bold"
-    [ngClass]="{
-      'block opacity-100': status === 'win',
-      'hidden opacity-0': status !== 'win',
-    }"
-  >
-    YOU WIN!!
-  </div>
-
-  <div
-    class="rounded transition-opacity delay-5 duration-500 my-4 py-2 px-4 bg-red-700 text-white text-xl font-bold"
-    [ngClass]="{
-      'block opacity-100': status === 'lose',
-      'hidden opacity-0': status !== 'lose',
-    }"
-  >
-    YOU LOSE :(
-  </div>
 
 
 </div>
