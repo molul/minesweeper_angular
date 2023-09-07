@@ -13,11 +13,13 @@
     </div>
   </div>
 
-  <div class="">
-    <table class="border border-black mx-auto">
-      <tr *ngFor="let row of board.cells; index as y ">
-        <td
-          class="w-8 h-8 border-2 border-slate-600"
+  <div class="p-2 w-full">
+    <div class="shadow-md max-w-lg rounded-md bg-slate-300 mx-auto space-y-2 p-4">
+			<!-- Rows -->
+      <div class="max-w-lg flex items-center justify-center space-x-1" *ngFor="let row of board.cells; index as y ">
+				<!-- Cells in row -->
+        <div
+          class="inline-block w-10 aspect-square shadow-md rounded-md"
           [ngClass]="{
             'bg-slate-400': cell.status !== 'clear',
             'bg-slate-200': cell.status === 'clear',
@@ -53,9 +55,9 @@
             </div>
           </div>
 
-        </td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div
