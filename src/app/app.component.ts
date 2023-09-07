@@ -17,7 +17,7 @@ export class AppComponent {
   }
 
   reset() {
-    this.board = new Board(10, 5);
+    this.board = new Board(10, 20);
     this.status = 'playing';
   }
 

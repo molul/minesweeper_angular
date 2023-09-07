@@ -40,7 +40,7 @@
                 'text-pink-600': cell.proximityMines === 8,
               }"
               *ngIf="cell.status === 'clear' && !cell.mine">
-              {{cell.proximityMines}}
+              {{cell.proximityMines > 0 ? cell.proximityMines : ''}}
             </div>
 
             <div *ngIf="cell.status === 'flag'" class="">
