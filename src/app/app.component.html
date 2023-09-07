@@ -1,37 +1,56 @@
-<div class="text-center bg-slate-100 h-screen px-2">
-  <div class="text-3xl font-bold py-4">
-    MINESWEEPER
-  </div>
+<div class="text-center bg-slate-700 h-screen p-2">
 
-  <div class="p-4 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50 text-left">
-    <div class="font-bold text-base sm:text-xl text-center mb-1">CONTROLS</div>
-    <div class="text-sm sm:text-base">
-      <div>
-        -<span class="font-semibold">Clear a cell:</span> click/touch
+  <div class="">
+
+    <!-- Title -->
+    <div class="p-4 mt-2 mb-4 max-w-lg rounded-md bg-slate-500 mx-auto shadow-md shadow-slate-800/50 text-left">
+      <div class="text-2xl sm:text-3xl font-bold text-white flex justify-left items-center gap-4">
+        <div class="w-10">
+          <img src="/assets/img/angular.png" alt="angular_icon" />
+        </div>
+        <div >
+          MINESWEEPER
+        </div>
       </div>
-      <div>
-        -<span class="font-semibold">Set flag:</span> right click on Desktop, long press on mobile
+    </div>
+
+    <!-- Controls -->
+    <div class="p-4 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50 text-left">
+
+      <div class="font-bold text-base sm:text-xl mb-1">
+        CONTROLS
+      </div>
+
+      <div class="text-sm sm:text-base">
+        <div>
+          -<span class="font-semibold">Clear a cell:</span> click/touch
+        </div>
+        <div>
+          -<span class="font-semibold">Set flag:</span> right click on Desktop, long press on mobile
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Interface -->
   <div class="flex justify-between items-center px-4 py-2 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50">
 		<div class="text-sm sm:text-base border-2 border-slate-500 bg-slate-200 rounded-md px-2 py-1.5">
       Mines: {{ this.status === 'firstClick' ? this.mines - this.flaggedMines : this.board.mineCount - this.flaggedMines }}
     </div>
 
 		<div>
-			<button (click)="reset()" class="text-sm sm:text-base shadow-md bg-slate-500 text-white px-8 py-2 rounded-md ">Restart</button>
+			<button (click)="reset()" class="border border-slate-600 text-sm sm:text-base shadow-md bg-slate-500 hover:bg-slate-400 active:bg-slate-400 transition-colors text-white px-8 py-2 rounded-md ">Restart</button>
 		</div>
 	</div>
 
+  <!-- Board -->
   <div class="w-full">
-    <div class="shadow-md shadow-slate-500/50 max-w-lg rounded-md bg-slate-300 mx-auto space-y-2 p-4">
-			<!-- Rows -->
+    <div class="relative shadow-md shadow-slate-500/50 max-w-lg rounded-md bg-slate-300 mx-auto space-y-2 p-4 sm:p-6">
+      <!-- Rows -->
       <div class="max-w-lg flex items-center justify-center space-x-1" *ngFor="let row of board.cells; index as y ">
-				<!-- Cells in row -->
+        <!-- Cells in row -->
         <div
-          class="inline-block w-10 aspect-square rounded sm:rounded-md flex items-center justify-center"
+          class="inline-block w-14 aspect-square rounded sm:rounded-md flex items-center justify-center"
           [ngClass]="{
             'bg-slate-400 shadow-[inset_-1px_-1px_6px_rgba(0,0,0,0.4)] ': cell.status !== 'clear',
             'bg-slate-200 shadow-[inset_2px_2px_6px_rgba(0,0,0,0.4)] ': cell.status === 'clear',
@@ -72,17 +91,27 @@
         </div>
       </div>
     </div>
+
   </div>
 
+
   <div
-    *ngIf="status === 'win'"
-    class="my-4 py-2 px-4 bg-green-700 text-white text-xl font-bold">
+    class="rounded transition-opacity duration-500 my-4 py-2 px-4 bg-green-700 text-white text-xl font-bold"
+    [ngClass]="{
+      'block opacity-100': status === 'win',
+      'hidden opacity-0': status !== 'win',
+    }"
+  >
     YOU WIN!!
   </div>
 
   <div
-    *ngIf="status === 'lose'"
-    class="my-4 py-2 px-4 bg-red-700 text-white text-xl font-bold">
+    class="rounded transition-opacity delay-5 duration-500 my-4 py-2 px-4 bg-red-700 text-white text-xl font-bold"
+    [ngClass]="{
+      'block opacity-100': status === 'lose',
+      'hidden opacity-0': status !== 'lose',
+    }"
+  >
     YOU LOSE :(
   </div>
 
