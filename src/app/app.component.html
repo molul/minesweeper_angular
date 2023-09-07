@@ -17,9 +17,10 @@
     <table class="border border-black mx-auto">
       <tr *ngFor="let row of board.cells; index as y ">
         <td
-          class="bg-slate-400 w-8 h-8 border-2 border-slate-600"
+          class="w-8 h-8 border-2 border-slate-600"
           [ngClass]="{
-            'bg-slate-200': cell.status === 'clear'
+            'bg-slate-400': cell.status !== 'clear',
+            'bg-slate-200': cell.status === 'clear',
           }"
           *ngFor="let cell of row; index as x"
           (click)="checkCell(cell)"
