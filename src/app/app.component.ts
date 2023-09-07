@@ -46,12 +46,12 @@ export class AppComponent {
 
   flag (cell: Cell) {
     if (this.status !== 'win' && this.status !== 'lose') {
-      if (this.flaggedMines < this.mines) {
-        if (cell.status !== 'clear') {
-          if (cell.status === 'flag') {
-            cell.status = 'open';
-            this.flaggedMines--;
-          } else {
+      if (cell.status !== 'clear') {
+        if (cell.status === 'flag') {
+          cell.status = 'open';
+          this.flaggedMines--;
+        } else {
+          if (this.flaggedMines < this.mines) {
             cell.status = 'flag';
             this.flaggedMines++;
           }
