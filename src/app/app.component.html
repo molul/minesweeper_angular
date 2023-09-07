@@ -72,10 +72,10 @@
         [disabled]="status === 'firstClick' || status === 'playing'"
         [ngClass]="{
           'bg-slate-700 text-slate-500': status === 'firstClick' || status === 'playing',
-          'bg-slate-500 hover:bg-slate-400 active:bg-slate-400 ': status === 'win' || status === 'lose',
+          'bg-slate-500 hover:bg-slate-400 active:bg-slate-400 text-white ': status === 'win' || status === 'lose',
 
         }"
-        class="text-sm sm:text-base shadow-md transition-colors text-white px-6 py-2 rounded-md ">
+        class="text-sm sm:text-base shadow-md transition-colors px-6 py-2 rounded-md ">
         Restart
       </button>
 		</div>
