@@ -3,7 +3,5 @@ export class Cell {
   mine = false;
   proximityMines = 0;
 
-  constructor(public row: number, public col: number) {
-
-  }
+  constructor(public row: number, public col: number) {}
 }

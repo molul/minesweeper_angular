@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { Board } from './game/board'
+import { Board } from './game/board';
 import { Cell } from './game/cell';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'minesweeper';
   board: Board;
-  status: 'firstClick' | 'playing' | 'win' | 'lose'
+  status: 'firstClick' | 'playing' | 'win' | 'lose';
   size = 9;
   mines = 10;
   flaggedMines = 0;
@@ -36,15 +36,14 @@ export class AppComponent {
     if (this.status !== 'win' && this.status !== 'lose') {
       const result = this.board.checkCell(cell);
       if (result === 'gameover') {
-        this.status = 'lose'
+        this.status = 'lose';
       } else if (result === 'win') {
         this.status = 'win';
       }
     }
   }
 
-
-  flag (cell: Cell) {
+  flag(cell: Cell) {
     if (this.status !== 'win' && this.status !== 'lose') {
       if (cell.status !== 'clear') {
         if (cell.status === 'flag') {
@@ -59,5 +58,4 @@ export class AppComponent {
       }
     }
   }
-
 }

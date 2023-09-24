@@ -1,8 +1,8 @@
 TO DO:
 
-No detecta el you win?
-
 Hacer el tablero en el primer click (la primera celda siempre está libre)
 
 Hacer mejores letreros de You win/lose
+
+Efecto destello cuando hagas click sobre una mina
 

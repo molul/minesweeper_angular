@@ -1,14 +1,23 @@
-import { Cell } from "./cell";
+import { Cell } from './cell';
 
 // Count mines
-const PEERS = [ [-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1] ];
+const PEERS = [
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
+];
 
 export class Board {
   cells: Cell[][] = [];
   private remainingCells = 0;
   public mineCount = 0;
 
-  constructor (size: number) {
+  constructor(size: number) {
     // Create grid
     for (let y = 0; y < size; y++) {
       this.cells[y] = [];
@@ -22,7 +31,7 @@ export class Board {
   // Methods:
   //------------------------
 
-  fillBoard (row: number, col: number, size: number, mines: number) {
+  fillBoard(row: number, col: number, size: number, mines: number) {
     // Assign mines
     let minesCount = 0;
     while (minesCount < mines) {
@@ -41,9 +50,11 @@ export class Board {
       for (let x = 0; x < size; x++) {
         let adjacentMines = 0;
         for (const peer of PEERS) {
-          if (this.cells[y + peer[0]] &&
+          if (
+            this.cells[y + peer[0]] &&
             this.cells[y + peer[0]][x + peer[1]] &&
-            this.cells[y + peer[0]][x + peer[1]].mine) {
+            this.cells[y + peer[0]][x + peer[1]].mine
+          ) {
             adjacentMines++;
           }
         }
@@ -55,8 +66,7 @@ export class Board {
       }
     }
 
-    this.remainingCells = (size * size) - this.mineCount;
-
+    this.remainingCells = size * size - this.mineCount;
   }
 
   getRandomCell(): Cell {
@@ -70,15 +80,14 @@ export class Board {
     if (cell.status !== 'open') {
       return null;
     } else if (cell.mine) {
-      this.revealAll()
-      return 'gameover'
+      this.revealAll();
+      return 'gameover';
     } else {
       cell.status = 'clear';
 
       if (cell.proximityMines === 0) {
         for (const peer of PEERS) {
-          if (this.cells[cell.row + peer[0]] &&
-            this.cells[cell.row + peer[0]][cell.col + peer[1]]) {
+          if (this.cells[cell.row + peer[0]] && this.cells[cell.row + peer[0]][cell.col + peer[1]]) {
             this.checkCell(this.cells[cell.row + peer[0]][cell.col + peer[1]]);
           }
         }
@@ -91,7 +100,7 @@ export class Board {
     }
   }
 
-  revealAll () {
+  revealAll() {
     for (const row of this.cells) {
       for (const cell of row) {
         if (cell.status === 'open') {
@@ -100,5 +109,4 @@ export class Board {
       }
     }
   }
-
 }
