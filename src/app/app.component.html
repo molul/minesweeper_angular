@@ -1,106 +1,97 @@
-<div class="text-center bg-slate-700 min-h-screen p-2">
-
-  <div class="">
-    <!-- Title -->
-    <div class="p-4 mt-2 mb-4 max-w-lg rounded-md bg-slate-500 mx-auto shadow-md shadow-slate-800/50 text-left">
-      <div class="text-2xl sm:text-3xl font-bold text-white flex justify-left items-center gap-4">
-        <div class="w-10">
-          <img src="/assets/img/angular.png" alt="angular_icon" />
-        </div>
-        <div >
-          MINESWEEPER
+<div class="text-center bg-slate-700 min-h-screen flex flex-col justify-between">
+  <div class="p-2">
+    <div class="">
+      <!-- Title -->
+      <div class="p-4 mt-2 mb-4 max-w-lg rounded-md bg-slate-500 mx-auto shadow-md shadow-slate-800/50 text-left">
+        <div class="text-2xl sm:text-3xl font-bold text-white flex justify-left items-center gap-4">
+          <div class="w-10">
+            <img src="/assets/img/angular.png" alt="angular_icon" />
+          </div>
+          <div>MINESWEEPER</div>
         </div>
       </div>
-    </div>
 
-    <!-- Controls -->
-    <div class="p-4 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50 text-left">
+      <!-- Controls -->
+      <div class="p-4 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50 text-left">
+        <div class="font-bold text-base sm:text-xl">CONTROLS</div>
 
-      <div class="font-bold text-base sm:text-xl ">
-        CONTROLS
-      </div>
-
-      <div class="text-sm sm:text-base">
-        <div>
-          -<span class="font-semibold">Clear a cell:</span> click/touch
-        </div>
-        <div>
-          -<span class="font-semibold">Set flag:</span> right click on Desktop, long press on mobile
+        <div class="text-sm sm:text-base">
+          <div>-<span class="font-semibold">Clear a cell:</span> click/touch</div>
+          <div>-<span class="font-semibold">Set flag:</span> right click on Desktop, long press on mobile</div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Interface -->
-  <div class="flex justify-between items-center px-4 py-2 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50">
-		<div class="text-sm sm:text-base flex gap-2 items-center">
-      <div class="font-bold">
-        Mines
-      </div>
-      <div class="border-2 border-slate-500 bg-slate-600 rounded-md px-2 py-1.5 text-white">
-        {{ this.status === 'firstClick' ? this.mines - this.flaggedMines : this.board.mineCount - this.flaggedMines }}
-
-      </div>
-    </div>
-
-    <!-- You win box -->
+    <!-- Interface -->
     <div
-      class="animate-pulse rounded-md transition-opacity duration-500 py-2 px-4 bg-green-700 text-white text-sm sm:text-xl font-bold"
-      [ngClass]="{
+      class="flex justify-between items-center px-4 py-2 mb-4 max-w-lg rounded-md bg-slate-300 mx-auto shadow-md shadow-slate-500/50"
+    >
+      <div class="text-sm sm:text-base flex gap-2 items-center">
+        <div class="font-bold">Mines</div>
+        <div class="border-2 border-slate-500 bg-slate-600 rounded-md px-2 py-1.5 text-white">
+          {{ this.status === 'firstClick' ? this.mines - this.flaggedMines : this.board.mineCount - this.flaggedMines }}
+        </div>
+      </div>
+
+      <!-- You win box -->
+      <div
+        class="animate-pulse rounded-md transition-opacity duration-500 py-2 px-4 bg-green-700 text-white text-sm sm:text-xl font-bold"
+        [ngClass]="{
         'block opacity-100': status === 'win',
         'hidden opacity-0': status !== 'win',
       }"
-    >
-      YOU WIN!!
-    </div>
+      >
+        YOU WIN!!
+      </div>
 
-    <!-- You lose box -->
-    <div
-      class="animate-pulse rounded-md transition-opacity duration-500 py-2 px-4 bg-red-700 text-white text-sm sm:text-xl font-bold"
-      [ngClass]="{
+      <!-- You lose box -->
+      <div
+        class="animate-pulse rounded-md transition-opacity duration-500 py-2 px-4 bg-red-700 text-white text-sm sm:text-xl font-bold"
+        [ngClass]="{
         'block opacity-100': status === 'lose',
         'hidden opacity-0': status !== 'lose',
       }"
-    >
-      YOU LOOSE :(
-    </div>
+      >
+        YOU LOOSE :(
+      </div>
 
-		<div>
-			<button
-        (click)="reset()"
-        [disabled]="status === 'firstClick' || status === 'playing'"
-        [ngClass]="{
+      <div>
+        <button
+          (click)="reset()"
+          [disabled]="status === 'firstClick' || status === 'playing'"
+          [ngClass]="{
           'bg-slate-700 text-slate-500': status === 'firstClick' || status === 'playing',
           'bg-slate-500 hover:bg-slate-400 active:bg-slate-400 text-white ': status === 'win' || status === 'lose',
 
         }"
-        class="text-sm sm:text-base shadow-md transition-colors px-6 py-2 rounded-md ">
-        Restart
-      </button>
-		</div>
-	</div>
+          class="text-sm sm:text-base shadow-md transition-colors px-6 py-2 rounded-md"
+        >
+          Restart
+        </button>
+      </div>
+    </div>
 
-  <!-- Board -->
-  <div class="w-full">
-    <div class="relative shadow-md shadow-slate-500/50 max-w-lg rounded-md bg-slate-300 mx-auto space-y-2 p-4 sm:p-6">
-      <!-- Rows -->
-      <div class="max-w-lg flex items-center justify-center space-x-1" *ngFor="let row of board.cells; index as y ">
-        <!-- Cells in row -->
-        <div
-          class="inline-block w-14 aspect-square rounded sm:rounded-md flex items-center justify-center"
-          [ngClass]="{
+    <!-- Board -->
+    <div class="w-full">
+      <div class="relative shadow-md shadow-slate-500/50 max-w-lg rounded-md bg-slate-300 mx-auto space-y-2 p-4 sm:p-6">
+        <!-- Rows -->
+        <div class="max-w-lg flex items-center justify-center space-x-1" *ngFor="let row of board.cells; index as y">
+          <!-- Cells in row -->
+          <div
+            class="inline-block w-14 aspect-square rounded sm:rounded-md flex items-center justify-center"
+            [ngClass]="{
             'bg-slate-400 shadow-[inset_-1px_-1px_6px_rgba(0,0,0,0.4)] ': cell.status !== 'clear',
             'bg-slate-200 shadow-[inset_2px_2px_6px_rgba(0,0,0,0.4)] ': cell.status === 'clear',
           }"
-          *ngFor="let cell of row; index as x"
-          (click)="checkCell(cell)"
-          (contextmenu)="$event.preventDefault(); flag(cell)"
-        >
-          <div class="flex items-center justify-center">
-            <!-- <div>{{cell.status}}</div> -->
-            <div
-              class="font-bold"
-              [ngClass]="{
+            *ngFor="let cell of row; index as x"
+            (click)="checkCell(cell)"
+            (contextmenu)="$event.preventDefault(); flag(cell)"
+          >
+            <div class="flex items-center justify-center">
+              <!-- <div>{{cell.status}}</div> -->
+              <div
+                class="font-bold"
+                [ngClass]="{
                 'text-blue-600': cell.proximityMines === 1,
                 'text-green-600': cell.proximityMines === 2,
                 'text-red-600': cell.proximityMines === 3,
@@ -110,23 +101,44 @@
                 'text-purple-600': cell.proximityMines === 7,
                 'text-pink-600': cell.proximityMines === 8,
               }"
-              *ngIf="cell.status === 'clear' && !cell.mine">
-              {{cell.proximityMines > 0 ? cell.proximityMines : ''}}
-            </div>
+                *ngIf="cell.status === 'clear' && !cell.mine"
+              >
+                {{ cell.proximityMines > 0 ? cell.proximityMines : '' }}
+              </div>
 
-            <!-- Flag icon on flagged cells -->
-            <div *ngIf="cell.status === 'flag'" class="">
-              <svg class="fill-red-400 stroke-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height: 24px;"><title>flag</title><path d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z" /></svg>
-            </div>
+              <!-- Flag icon on flagged cells -->
+              <div *ngIf="cell.status === 'flag'" class="">
+                <svg
+                  class="fill-red-400 stroke-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  style="width: 24px; height: 24px"
+                >
+                  <title>flag</title>
+                  <path d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z" />
+                </svg>
+              </div>
 
-            <!-- Mine icon on mine cells -->
-            <div *ngIf="cell.mine && cell.status === 'clear'">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height: 24px;"><title>mine</title><path d="M23,13V11H19.93C19.75,9.58 19.19,8.23 18.31,7.1L20.5,4.93L19.07,3.5L16.9,5.69C15.77,4.81 14.42,4.25 13,4.07V1H11V4.07C9.58,4.25 8.23,4.81 7.1,5.69L4.93,3.5L3.5,4.93L5.69,7.1C4.81,8.23 4.25,9.58 4.07,11H1V13H4.07C4.25,14.42 4.81,15.77 5.69,16.9L3.5,19.07L4.93,20.5L7.1,18.31C8.23,19.19 9.58,19.75 11,19.93V23H13V19.93C14.42,19.75 15.77,19.19 16.9,18.31L19.07,20.5L20.5,19.07L18.31,16.9C19.19,15.77 19.75,14.42 19.93,13H23M12,8A4,4 0 0,0 8,12H6A6,6 0 0,1 12,6V8Z" /></svg>
+              <!-- Mine icon on mine cells -->
+              <div *ngIf="cell.mine && cell.status === 'clear'">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 24px; height: 24px">
+                  <title>mine</title>
+                  <path
+                    d="M23,13V11H19.93C19.75,9.58 19.19,8.23 18.31,7.1L20.5,4.93L19.07,3.5L16.9,5.69C15.77,4.81 14.42,4.25 13,4.07V1H11V4.07C9.58,4.25 8.23,4.81 7.1,5.69L4.93,3.5L3.5,4.93L5.69,7.1C4.81,8.23 4.25,9.58 4.07,11H1V13H4.07C4.25,14.42 4.81,15.77 5.69,16.9L3.5,19.07L4.93,20.5L7.1,18.31C8.23,19.19 9.58,19.75 11,19.93V23H13V19.93C14.42,19.75 15.77,19.19 16.9,18.31L19.07,20.5L20.5,19.07L18.31,16.9C19.19,15.77 19.75,14.42 19.93,13H23M12,8A4,4 0 0,0 8,12H6A6,6 0 0,1 12,6V8Z"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-slate-500 mt-4 text-white p-4 w-full">
+    Developed by
+    <span class="font-bold"><a href="https://www.luismorcilloluque.com/es" target="_blank">Luis Morcillo</a></span> with
+    Angular &copy; 2023
   </div>
 </div>
